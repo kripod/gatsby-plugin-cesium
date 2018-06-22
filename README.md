@@ -23,7 +23,7 @@ module.exports = {
 
 - All of the Cesium libraries can be imported and used with the following syntax:
 
-  ```js
+  ```jsx
   import Cesium from 'cesium';
   import 'cesium/Source/Widgets/widgets.css';
   import React from 'react';
