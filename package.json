@@ -18,7 +18,8 @@
     "format": "prettier --ignore-path .gitignore --write \"**/*.{js,json,md}\""
   },
   "dependencies": {
-    "copy-webpack-plugin": "^4.5.1"
+    "copy-webpack-plugin": "^4.5.1",
+    "strip-pragma-loader": "^1.0.0"
   },
   "peerDependencies": {
     "cesium": ">=1.37.0",
