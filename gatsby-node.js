@@ -2,7 +2,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { DefinePlugin } = require('webpack'); // eslint-disable-line import/no-unresolved
 
-const cesiumSource = 'node_modules/cesium/Source';
+const cesiumSource = path.join(require.resolve('cesium/Source/Cesium'), '..');
 const cesiumWorkers = '../Build/Cesium/Workers';
 
 exports.onCreateWebpackConfig = ({ actions, stage, loaders }) => {
