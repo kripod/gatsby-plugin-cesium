@@ -2,6 +2,8 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { DefinePlugin } = require('webpack'); // eslint-disable-line import/no-unresolved
 
+const cesiumOutputDirectory = 'Cesium';
+
 const cesiumSource = path.join(require.resolve('cesium/Source/Cesium'), '..');
 const cesiumWorkers = '../Build/Cesium/Workers';
 
@@ -28,19 +30,20 @@ exports.onCreateWebpackConfig = ({ actions, stage, loaders }) => {
 
     plugins: [
       // Copy Cesium Assets, Widgets, and Workers to a static directory
-      new CopyWebpackPlugin([
-        { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
-      ]),
-      new CopyWebpackPlugin([
-        { from: path.join(cesiumSource, 'Assets'), to: 'Assets' },
-      ]),
-      new CopyWebpackPlugin([
-        { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' },
-      ]),
+      new CopyWebpackPlugin(
+        [
+          { from: cesiumWorkers, to: `${cesiumOutputDirectory}/Workers` },
+          { from: 'Assets', to: `${cesiumOutputDirectory}/Assets` },
+          { from: 'Widgets', to: `${cesiumOutputDirectory}/Widgets` },
+        ],
+        {
+          context: cesiumSource,
+        },
+      ),
 
       new DefinePlugin({
         // Define relative base path in Cesium for loading assets
-        CESIUM_BASE_URL: JSON.stringify(''),
+        CESIUM_BASE_URL: JSON.stringify(`/${cesiumOutputDirectory}/`),
       }),
     ],
 
